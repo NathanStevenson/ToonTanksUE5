@@ -12,7 +12,7 @@ Saved/
 *.userprefs
 *.lnk
 
-# VSCode - minor change to see if it works
+# VSCode - minor 
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
