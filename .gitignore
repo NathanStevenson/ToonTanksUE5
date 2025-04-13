@@ -1,3 +1,69 @@
+# Unreal Engine specific
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+*.VC.db
+*.opensdf
+*.sdf
+*.suo
+*.sln
+*.user
+*.userprefs
+*.lnk
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Compiled source
+*.dll
+*.exe
+*.pdb
+*.app
+*.dylib
+*.lib
+*.so
+*.a
+
+# Logs
+*.log
+
+# Build folders
+Build/
+
+# Ignore config cache
+Config/DefaultEditor.ini
+
+# Optional: ignore if not using plugins or marketplaces
+Plugins/*/Intermediate/
+Plugins/*/Binaries/
+
+# Ignore auto-generated project files (if you regenerate from .uproject)
+*.xcodeproj
+*.xcworkspace
+*.opensdf
+*.sdf
+*.ipch
+
+# Ignore project-specific backup files
+*.tmp
+*.bak
+*.backup
+*.old
+*.orig
+
+# Ignore Unreal Engine auto-generated files
+*.generated.*
+*.generated.h
+*.generated.cpp
+
+# Optional: Ignore uprojectautosave
+*.uprojectdirs
+*.uprojectautosave
+
 # Visual Studio 2015 user specific files
 .vs/
 
