@@ -21,6 +21,13 @@ void ATower::Tick(float DeltaTime)
     }    
 }
 
+// Visual and Sound Effects when Pawn dies
+void ATower::HandleDestruction(){
+    // call the handle destruction from parent (handles sounds effects)
+	Super::HandleDestruction();
+    Destroy();
+}
+
 
 void ATower::BeginPlay()
 {

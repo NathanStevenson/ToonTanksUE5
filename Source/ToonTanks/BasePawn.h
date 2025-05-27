@@ -15,7 +15,8 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
-
+	// cleans up the pawn when it is dead
+	void HandleDestruction();
 
 protected:
 	// function that takes in a location and rotates the pawn to that target location

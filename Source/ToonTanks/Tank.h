@@ -23,6 +23,10 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
+		// cleans up the pawn when it is dead
+		void HandleDestruction();
+		// Reference to the player controller
+		APlayerController* TankPlayerController;
 	
 	protected:
 		// Called when the game starts or when spawned
@@ -31,10 +35,10 @@ class TOONTANKS_API ATank : public ABasePawn
 	// necessary variables specific to the ATank class
 	private:
 		// Components
-		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Spring Arm", meta = (AllowPrivateAccess = "true"))
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spring Arm", meta = (AllowPrivateAccess = "true"))
 		class USpringArmComponent* SpringArmComponent;
 
-		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* CameraComponent;
 
 		// Variables controlling movement
@@ -47,7 +51,4 @@ class TOONTANKS_API ATank : public ABasePawn
 		// Functions for binding to key presses
 		void MoveForward(float value);
 		void Turn(float value);
-
-		// Reference to the player controller
-		APlayerController* PlayerControllerRef;
 };

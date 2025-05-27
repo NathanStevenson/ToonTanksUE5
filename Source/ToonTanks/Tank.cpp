@@ -23,12 +23,9 @@ ATank::ATank()
 
 
 // Called when the game starts or when spawned
-void ATank::BeginPlay()
-{
+void ATank::BeginPlay(){
 	Super::BeginPlay();
-    
-    PlayerControllerRef = Cast<APlayerController>(GetController());
-
+    TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 
@@ -38,17 +35,23 @@ void ATank::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
     
     // good practice to ensure pointer is not null before using
-    if(PlayerControllerRef){
+    if(TankPlayerController){
         // post function call this will be populated with info about the hit event
         FHitResult HitResult;
         // want to use ECC_Visibility. Many objects block visbility channel by default which is what we want
-        PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
+        TankPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
 
         // rotates the turret with respect to the cursor
         RotateTurret(HitResult.ImpactPoint);
     }
 }
 
+// cleans up the pawn when dies; for tank just want to hide it not completely destroy so that respawn can happen
+void ATank::HandleDestruction(){
+    Super::HandleDestruction();
+    SetActorHiddenInGame(true); // hides the tank
+    SetActorTickEnabled(false); // stops ticking to save resources
+}
 
 // this function is inherited from parent class and overrides it. Uses its functionality but adds extra custom functions to input mappings in UE5
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

@@ -27,6 +27,10 @@ ABasePawn::ABasePawn()
 
 }
 
+void ABasePawn::HandleDestruction(){
+	// Visual and Sound Effects when Pawn dies
+	
+}
 
 void ABasePawn::RotateTurret(FVector Target)
 {

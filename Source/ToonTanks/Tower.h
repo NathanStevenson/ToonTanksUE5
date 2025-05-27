@@ -16,7 +16,8 @@ class TOONTANKS_API ATower : public ABasePawn
 
 public:
 	virtual void Tick(float DeltaTime) override;
-
+	// cleans up the pawn when it is dead
+	void HandleDestruction();
 
 protected:
 		// Called when the game starts or when spawned

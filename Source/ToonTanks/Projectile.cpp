@@ -44,6 +44,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	auto MyOwnerInstigator = MyOwner->GetInstigatorController();
 
 	// Apply Damage to the actor and then delete the projectile if other actor exists, is not a projectile, and not the thing firing it
+	// change this to cast of projectile to see if true - rn bullets destroy other bullets
 	if(OtherActor && OtherActor != this && OtherActor != MyOwner){
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, this, UDamageType::StaticClass());
 		this->Destroy();
