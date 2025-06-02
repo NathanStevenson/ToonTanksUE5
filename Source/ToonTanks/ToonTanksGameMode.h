@@ -25,10 +25,17 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartGame();
 
+	// function that is defined in Blueprints for when game is over
+	UFUNCTION(BlueprintImplementableEvent)
+	void GameOver(bool bWonGame);
+
 private:
 	class ATank* Tank;
 	class AToonTanksPlayerController* ToonTanksPlayerController; // pointer to custom player controller rather than having it located on the Tank
 
 	float StartDelay = 3.f; // wait 3 seconds before enabling input
 	void HandleGameStart();
+
+	int32 numTowers = 0;
+	int32 GetTargetTowerCount();
 };

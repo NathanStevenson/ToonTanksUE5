@@ -30,6 +30,18 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Capsule", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* capsule_comp;
 
+	// forward declare the Death Explosion Particles
+	UPROPERTY(EditAnywhere)
+	class UParticleSystem* DeathParticles;
+
+	// audio to play when the Tower/Tank dies
+	UPROPERTY(EditAnywhere)
+	class USoundBase* DeathSound;
+
+	// camera shake for new UE5.1 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
+
 	// static mesh components for the tanks base and the turret (different so they can move independently of each other)
 	// included by default. do not need to forward to declare with "class"
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Static Mesh", meta = (AllowPrivateAccess = "true"))

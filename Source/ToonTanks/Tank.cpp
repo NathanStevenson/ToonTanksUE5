@@ -51,6 +51,7 @@ void ATank::HandleDestruction(){
     Super::HandleDestruction();
     SetActorHiddenInGame(true); // hides the tank
     SetActorTickEnabled(false); // stops ticking to save resources
+    bAlive = false;             // sets tank status to dead
 }
 
 // this function is inherited from parent class and overrides it. Uses its functionality but adds extra custom functions to input mappings in UE5

@@ -13,9 +13,16 @@ void AToonTanksGameMode::ActorDied(AActor* DeadActor){
     if(DeadActor == Tank && ToonTanksPlayerController){
         Tank->HandleDestruction();
         ToonTanksPlayerController->SetPlayerEnabledState(false);
+        // if tank died lost game
+        GameOver(false);
     }
     else if (ATower* DeadTower = Cast<ATower>(DeadActor)){
         DeadTower->HandleDestruction();
+        // if tower dead decr variable
+        numTowers--;
+        if (numTowers == 0){ 
+            GameOver(true); // game has been won
+        }
     }
 }
 
@@ -28,6 +35,8 @@ void AToonTanksGameMode::BeginPlay(){
 void AToonTanksGameMode::HandleGameStart(){
     // this is using our current world and the player index of 0 for singleplayer to get ahold of the tank pawn
     Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
+    // set tower count for current world
+    numTowers = GetTargetTowerCount();
     // call Blueprint function to add the widget to the viewport - triggers BP event
     StartGame();
     // gets the player controller for this gameplay + disable input
@@ -39,4 +48,12 @@ void AToonTanksGameMode::HandleGameStart(){
         FTimerHandle PlayerEnableTimerHandle;
         GetWorldTimerManager().SetTimer(PlayerEnableTimerHandle, InputDelegate, StartDelay, false);
     }
+}
+
+// helper function called at the start of the game which will dynamically count all actors of type tower
+int32 AToonTanksGameMode::GetTargetTowerCount() {
+    TArray<AActor*> Towers; // TArray out value; will store all tower actor pointers
+    // get ATower UClass from blueprints via StaticClass
+    UGameplayStatics::GetAllActorsOfClass(this, ATower::StaticClass(), Towers);
+    return Towers.Num();
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -30,6 +31,24 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* Movement;
+
+	// forward declare the Hit Particles (attach UI thru blueprints)
+	UPROPERTY(EditAnywhere)
+	class UParticleSystem* HitParticles;
+
+	// forward declare UParticleSystemComponent (smoke trail which follows the proj)
+	UPROPERTY(VisibleAnywhere)
+	class UParticleSystemComponent* SmokeTrail;
+
+	// audio variables which can play sound when projectiles is fired and hit
+	UPROPERTY(EditAnywhere)
+	class USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* LaunchSound;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);

@@ -27,6 +27,8 @@ class TOONTANKS_API ATank : public ABasePawn
 		void HandleDestruction();
 		// Reference to the player controller
 		APlayerController* TankPlayerController;
+		// is tank alive
+		bool bAlive = true;
 	
 	protected:
 		// Called when the game starts or when spawned

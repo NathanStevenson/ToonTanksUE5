@@ -4,6 +4,7 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
 #include "Projectile.h"
 
 // Sets default values
@@ -28,8 +29,18 @@ ABasePawn::ABasePawn()
 }
 
 void ABasePawn::HandleDestruction(){
-	// Visual and Sound Effects when Pawn dies
-	
+	// Visual Explosion effect when tank or tower dies
+	if (DeathParticles){
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
+	}
+	// play the death sound when a tank or tower dies
+	if (DeathSound){
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+	}
+	// when pawn dies shake the screen a lot (TSubClassof set to death shake)
+	if (DeathCameraShakeClass) {
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
 }
 
 void ABasePawn::RotateTurret(FVector Target)
